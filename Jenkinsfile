@@ -95,7 +95,7 @@ node("maven") {
 
 
               sh "  oc patch bc/quarkus-quickstart -p '{\"spec\":{\"strategy\":{\"dockerStrategy\":{\"dockerfilePath\":\"src/main/docker/Dockerfile.native\"}}}}' "
-              sh "  oc start-build quarkus-quickstart --from-dir=. --follow "
+              sh "  oc start-build quarkus-quickstart --from-dir=${WORKSPACE}/maven/frontend --follow "
 
             }
         }
