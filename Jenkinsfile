@@ -3,7 +3,7 @@
 node("maven") {
 
     stage("SCM checkout") {
-        git checkout
+        def commitHash = checkout(scm).GIT_COMMIT
     }
 
 
