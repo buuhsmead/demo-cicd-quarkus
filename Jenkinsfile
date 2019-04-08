@@ -83,7 +83,7 @@ node("maven") {
             dir('frontend') {
         //       sh "${mvnCmd} package -Pnative -Dnative-image.docker-build=true"
 
-                def bcExist = openshift.selector('bc', 'quarkus-quickstart').exists()
+                def bcExist = openshift.selector('bc', 'quarkus-quickstart')
 
             if (!bcExist) {
               sh "  oc new-build --binary --name=quarkus-quickstart -l app=quarkus-quickstart "
