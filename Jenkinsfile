@@ -83,6 +83,8 @@ node("maven") {
             dir('frontend') {
         //       sh "${mvnCmd} package -Pnative -Dnative-image.docker-build=true"
 
+                sh "${mvnCmd} package"
+
                 openshift.withCluster() {
                     def bcExist = openshift.selector('bc', 'quarkus-quickstart')
 
@@ -94,7 +96,7 @@ node("maven") {
 
 sh " ls -ltr target"
 
-              sh "  oc patch bc/quarkus-quickstart -p '{\"spec\":{\"strategy\":{\"dockerStrategy\":{\"dockerfilePath\":\"src/main/docker/Dockerfile.native\"}}}}' "
+              sh "  oc patch bc/quarkus-quickstart -p '{\"spec\":{\"strategy\":{\"dockerStrategy\":{\"dockerfilePath\":\"src/main/docker/Dockerfile.jvm\"}}}}' "
               sh "  oc start-build quarkus-quickstart --from-dir=${WORKSPACE}/maven/frontend --follow "
 
             }
